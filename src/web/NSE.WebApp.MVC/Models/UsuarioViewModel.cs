@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NSE.Identidade.API.Models
+namespace NSE.WebApp.MVC.Models
 {
     public class UsuarioRegistro
     {
@@ -16,6 +17,7 @@ namespace NSE.Identidade.API.Models
         [StringLength(100, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 6)]
         public string Senha { get; set; }
 
+        [DisplayName("Confirme sua senha")]
         [Compare(nameof(Senha), ErrorMessage = "As senhas não conferem.")]
         public string SenhaConfirmacao { get; set; }
     }
@@ -36,6 +38,7 @@ namespace NSE.Identidade.API.Models
         public string AccessToken { get; set; }
         public double ExpiresIn { get; set; }
         public UsuarioToken UsuarioToken { get; set; }
+        public ResponseResult ResponseResult { get; set; }
 
     }
 
