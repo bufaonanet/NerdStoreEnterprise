@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NSE.Identidade.API.Configuration;
+using NSE.WebApi.Core.Identidade;
 
 namespace NSE.Identidade.API
 {
@@ -31,6 +32,8 @@ namespace NSE.Identidade.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddIdentityConfiguration(Configuration);
+
+            services.AddJwtConfiguration(Configuration);
           
             services.AddApiConfiguration();
 

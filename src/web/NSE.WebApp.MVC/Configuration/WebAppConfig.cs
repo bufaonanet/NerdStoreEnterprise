@@ -26,6 +26,8 @@ namespace NSE.WebApp.MVC.Configuration
             //{
             //}
 
+            //app.UseDeveloperExceptionPage();
+
             app.UseExceptionHandler("/erro/500");
             app.UseStatusCodePagesWithRedirects("/erro/{0}");
             app.UseHsts();
@@ -43,7 +45,7 @@ namespace NSE.WebApp.MVC.Configuration
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Catalogo}/{action=Index}/{id?}");
             });
 
         }

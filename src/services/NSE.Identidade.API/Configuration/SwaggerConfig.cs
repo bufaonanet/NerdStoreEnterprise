@@ -11,7 +11,7 @@ namespace NSE.Identidade.API.Configuration
 {
     public static class SwaggerConfig
     {
-        public static IServiceCollection AddSwaggerConfigurations(this IServiceCollection services)
+        public static void AddSwaggerConfigurations(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
             {
@@ -21,21 +21,16 @@ namespace NSE.Identidade.API.Configuration
                     Description = "Esta API faz a parte de autenticação",
                     Contact = new OpenApiContact { Name = "Douglas Souto", Email = "douglas.bufaonanet@outlook.com" }
                 });
-            });
-
-
-            return services;
+            });           
         }
 
-        public static IApplicationBuilder UseSwaggerConfiguration(this IApplicationBuilder app)
+        public static void UseSwaggerConfiguration(this IApplicationBuilder app)
         {
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-            });
-
-            return app;
+            });           
         }
     }
 }
