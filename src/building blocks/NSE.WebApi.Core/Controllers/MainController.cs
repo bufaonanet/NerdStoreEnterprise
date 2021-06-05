@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation.Results;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace NSE.Identidade.API.Controllers
+namespace NSE.WebApi.Core.Controllers
 {
     [ApiController]
     public abstract class MainController : Controller
@@ -35,6 +34,16 @@ namespace NSE.Identidade.API.Controllers
             {
                 {"Mensagem", Erros.ToArray() }
             }));
+        }
+
+        protected ActionResult CustomResponse(ValidationResult validationResult)
+        {
+            foreach (var erro in validationResult.Errors)
+            {
+                AdicionarErroProcessamento(erro.ErrorMessage);
+            }
+
+            return CustomResponse();
         }
 
         protected bool OperacaoValida()
