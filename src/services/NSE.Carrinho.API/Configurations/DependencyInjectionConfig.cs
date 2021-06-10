@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using NSE.Carrinho.API.Data;
+using NSE.WebApi.Core.Usuario;
 
 namespace NSE.Carrinho.API.Configurations
 {
@@ -6,6 +9,9 @@ namespace NSE.Carrinho.API.Configurations
     {
         public static void RegisterServices(this IServiceCollection services)
         {
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IAspNetUser, AspNetUser>();
+            services.AddScoped<CarrinhoContext>();
            
         }
     }

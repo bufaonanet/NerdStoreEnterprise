@@ -3,21 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 
-namespace NSE.WebApp.MVC.Extensions
+namespace NSE.WebApi.Core.Usuario
 {
-    public interface IUser
-    {
-        string Name { get; }
-        Guid ObterUserId();
-        string ObterUserEmail();
-        string ObterUserToken();
-        bool EstaAutenticado();
-        bool PossuiRole(string role);
-        IEnumerable<Claim> ObterClaims();
-        HttpContext ObterHttpContext();
-    }
-
-    public class AspNetUser : IUser
+    public class AspNetUser : IAspNetUser
     {
         private readonly IHttpContextAccessor _accessor;
 
@@ -51,7 +39,7 @@ namespace NSE.WebApp.MVC.Extensions
         public IEnumerable<Claim> ObterClaims()
         {
             return _accessor.HttpContext.User.Claims;
-        }       
+        }
 
         public bool PossuiRole(string role)
         {
@@ -99,6 +87,4 @@ namespace NSE.WebApp.MVC.Extensions
             return claim?.Value;
         }
     }
-
-
 }
