@@ -23,7 +23,7 @@ namespace NSE.WebApp.MVC.Services
         {
             var response = await _httpCliente.GetAsync($"/catalogo/produtos/");
 
-            TratarErroResponse(response);
+            TratarErrosResponse(response);
 
             return await DeserializarJsonParaObjeto<IEnumerable<ProdutoViewModel>>(response);
         }
@@ -32,7 +32,7 @@ namespace NSE.WebApp.MVC.Services
         {
             var response = await _httpCliente.GetAsync($"/catalogo/produtos/{id}");
 
-            TratarErroResponse(response);
+            TratarErrosResponse(response);
 
             return await DeserializarJsonParaObjeto<ProdutoViewModel>(response);
         }

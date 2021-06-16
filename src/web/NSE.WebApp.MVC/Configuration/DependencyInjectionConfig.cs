@@ -18,22 +18,33 @@ namespace NSE.WebApp.MVC.Configuration
     {
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton<IValidationAttributeAdapterProvider, CpfValidationAttributeAdapterProvider>();           
-           
+            services.AddSingleton<IValidationAttributeAdapterProvider, CpfValidationAttributeAdapterProvider>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IAspNetUser, AspNetUser>();
+
+            #region HttpServices
+            
             services.AddTransient<HttpClienteAuthorizationDelegatingHandler>();
-            services.AddHttpClient<IAutenticacaoService, AutenticacaoService>();
+            
+            services.AddHttpClient<IAutenticacaoService, AutenticacaoService>()
+                .AddPolicyHandler(PollyExtension.EsperarTentar())
+                .AddTransientHttpErrorPolicy(
+                    p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));             
 
             services.AddHttpClient<ICatalogoService, CatalogoService>()
                 .AddHttpMessageHandler<HttpClienteAuthorizationDelegatingHandler>()
-                //.AddTransientHttpErrorPolicy(
-                // p => p.WaitAndRetryAsync(retryCount: 3, sleepDurationProvider: _ => TimeSpan.FromMilliseconds(600)))
                 .AddPolicyHandler(PollyExtension.EsperarTentar())
                 .AddTransientHttpErrorPolicy(
-                    p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(20)))
-                ;
+                    p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IAspNetUser, AspNetUser>();
+            services.AddHttpClient<ICarrinhoService, CarrinhoService>()
+               .AddHttpMessageHandler<HttpClienteAuthorizationDelegatingHandler>()
+               .AddPolicyHandler(PollyExtension.EsperarTentar())
+               .AddTransientHttpErrorPolicy(
+                   p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+            #endregion            
+
+
 
             #region Refit
             //services.AddHttpClient("Refit", options =>
@@ -43,7 +54,6 @@ namespace NSE.WebApp.MVC.Configuration
             //    .AddHttpMessageHandler<HttpClienteAuthorizationDelegatingHandler>()
             //    .AddTypedClient(Refit.RestService.For<ICatalogoServiceRefit>);
             #endregion
-
         }
     }
 

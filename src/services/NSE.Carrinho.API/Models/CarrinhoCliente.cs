@@ -76,7 +76,8 @@ namespace NSE.Carrinho.API.Models
 
         internal CarrinhoItem ObterPorProdutoId(Guid produtoId)
         {
-            return Itens.FirstOrDefault(i => i.ProdutoId == produtoId);
+            var produto = Itens.FirstOrDefault(i => i.ProdutoId == produtoId);
+            return produto;
         }
 
         internal void CalcularValorCarrinho()
@@ -92,7 +93,8 @@ namespace NSE.Carrinho.API.Models
         public class CarrinhoClienteValidation : AbstractValidator<CarrinhoCliente>
         {
             public CarrinhoClienteValidation()
-            {
+            {              
+
                 RuleFor(c => c.ClienteId)
                     .NotEqual(Guid.Empty)
                     .WithMessage("Cliente não reconhecido");
