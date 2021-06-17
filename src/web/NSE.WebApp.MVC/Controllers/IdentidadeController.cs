@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using NSE.WebApp.MVC.Extensions;
 using NSE.WebApp.MVC.Models;
 using NSE.WebApp.MVC.Services;
 using System;
@@ -101,8 +99,5 @@ namespace NSE.WebApp.MVC.Controllers
         {
             return new JwtSecurityTokenHandler().ReadJwtToken(jwtToken) as JwtSecurityToken;
         }
-
-
-
     }
 }

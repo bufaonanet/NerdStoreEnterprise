@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NSE.WebApp.MVC.Models;
+using NSE.Core.Communication;
 using System.Linq;
 
 namespace NSE.WebApp.MVC.Controllers
@@ -8,9 +8,9 @@ namespace NSE.WebApp.MVC.Controllers
     {
         protected bool ResponsePossuiErros(ResponseResult response)
         {
-            if (response != null && response.Errors.Mensagem.Any())
+            if (response != null && response.Errors.Mensagens.Any())
             {
-                foreach (var mensagem in response.Errors.Mensagem)
+                foreach (var mensagem in response.Errors.Mensagens)
                 {
                     ModelState.AddModelError(string.Empty, mensagem);
                 }

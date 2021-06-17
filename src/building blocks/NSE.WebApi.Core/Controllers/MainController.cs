@@ -1,6 +1,7 @@
 ﻿using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using NSE.Core.Communication;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,18 +12,6 @@ namespace NSE.WebApi.Core.Controllers
     {
         protected ICollection<string> Erros = new List<string>();
 
-        protected ActionResult CustomResponse(ModelStateDictionary modelState)
-        {
-            var erros = modelState.Values.SelectMany(e => e.Errors);
-
-            foreach (var erro in erros)
-            {
-                AdicionarErroProcessamento(erro.ErrorMessage);
-            }
-
-            return CustomResponse();
-
-        }
         protected ActionResult CustomResponse(object result = null)
         {
             if (OperacaoValida())
@@ -36,6 +25,16 @@ namespace NSE.WebApi.Core.Controllers
             }));
         }
 
+        protected ActionResult CustomResponse(ModelStateDictionary modelState)
+        {
+            var erros = modelState.Values.SelectMany(e => e.Errors);
+            foreach (var erro in erros)
+            {
+                AdicionarErroProcessamento(erro.ErrorMessage);
+            }
+            return CustomResponse();
+        }
+
         protected ActionResult CustomResponse(ValidationResult validationResult)
         {
             foreach (var erro in validationResult.Errors)
@@ -45,6 +44,25 @@ namespace NSE.WebApi.Core.Controllers
 
             return CustomResponse();
         }
+
+        protected ActionResult CustomResponse(ResponseResult resposta)
+        {
+            ResponsePossuiErros(resposta);
+
+            return CustomResponse();
+        }
+
+        protected bool ResponsePossuiErros(ResponseResult resposta)
+        {
+            if (resposta == null || !resposta.Errors.Mensagens.Any()) return false;
+
+            foreach (var mensagem in resposta.Errors.Mensagens)
+            {
+                AdicionarErroProcessamento(mensagem);
+            }
+
+            return true;
+        }        
 
         protected bool OperacaoValida()
         {

@@ -43,12 +43,12 @@
                         </div>
 
                         <h5>@Model.Descricao</h5><br />
-                        <p> @this.MensagemEstoque(Model.Quantidade)</p>
+                        <p> @this.MensagemEstoque(Model.QuantidadeEstoque)</p>
 
                         <hr>
 
                         @{
-                            if (Model.Quantidade > 0)
+                            if (Model.QuantidadeEstoque > 0)
                             {
                                 <div class="form-row">
                                     <div class="form-group col-md flex-grow-0">

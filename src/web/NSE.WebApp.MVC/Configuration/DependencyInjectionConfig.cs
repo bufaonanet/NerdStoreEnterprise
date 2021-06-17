@@ -23,25 +23,22 @@ namespace NSE.WebApp.MVC.Configuration
             services.AddScoped<IAspNetUser, AspNetUser>();
 
             #region HttpServices
-            
+
             services.AddTransient<HttpClienteAuthorizationDelegatingHandler>();
-            
+
             services.AddHttpClient<IAutenticacaoService, AutenticacaoService>()
                 .AddPolicyHandler(PollyExtension.EsperarTentar())
-                .AddTransientHttpErrorPolicy(
-                    p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));             
+                .AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddHttpClient<ICatalogoService, CatalogoService>()
                 .AddHttpMessageHandler<HttpClienteAuthorizationDelegatingHandler>()
                 .AddPolicyHandler(PollyExtension.EsperarTentar())
-                .AddTransientHttpErrorPolicy(
-                    p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+                .AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
-            services.AddHttpClient<ICarrinhoService, CarrinhoService>()
+            services.AddHttpClient<IComprasBffService, ComprasBffService>()
                .AddHttpMessageHandler<HttpClienteAuthorizationDelegatingHandler>()
                .AddPolicyHandler(PollyExtension.EsperarTentar())
-               .AddTransientHttpErrorPolicy(
-                   p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+               .AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
             #endregion            
 
 
@@ -57,7 +54,7 @@ namespace NSE.WebApp.MVC.Configuration
         }
     }
 
-    public class PollyExtension
+    public static class PollyExtension
     {
         public static AsyncRetryPolicy<HttpResponseMessage> EsperarTentar()
         {
