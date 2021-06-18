@@ -21,7 +21,7 @@ namespace NSE.WebApi.Core.Controllers
 
             return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
             {
-                {"Mensagem", Erros.ToArray() }
+                { "Mensagens", Erros.ToArray() }
             }));
         }
 
@@ -32,6 +32,7 @@ namespace NSE.WebApi.Core.Controllers
             {
                 AdicionarErroProcessamento(erro.ErrorMessage);
             }
+
             return CustomResponse();
         }
 
@@ -62,7 +63,7 @@ namespace NSE.WebApi.Core.Controllers
             }
 
             return true;
-        }        
+        }
 
         protected bool OperacaoValida()
         {
@@ -74,7 +75,7 @@ namespace NSE.WebApi.Core.Controllers
             Erros.Add(erro);
         }
 
-        protected void LimparErroProcessamento(string erro)
+        protected void LimparErrosProcessamento()
         {
             Erros.Clear();
         }
