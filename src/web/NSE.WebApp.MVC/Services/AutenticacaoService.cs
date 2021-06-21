@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 
 namespace NSE.WebApp.MVC.Services
 {
+    public interface IAutenticacaoService
+    {
+        Task<UsuarioRespostaLogin> Registro(UsuarioRegistro usuarioRegistro);
+        Task<UsuarioRespostaLogin> Login(UsuarioLogin usuarioLogin);
+    }
+
     public class AutenticacaoService : Service, IAutenticacaoService
     {
         private readonly HttpClient _httpCliente;       

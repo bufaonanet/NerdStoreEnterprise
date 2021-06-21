@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NSE.Pedido.API.Application.DTO;
-using NSE.Pedido.API.Application.Queries;
+using NSE.Pedidos.API.Application.DTO;
+using NSE.Pedidos.API.Application.Queries;
 using NSE.WebApi.Core.Controllers;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace NSE.Pedido.API.Controllers
+namespace NSE.Pedidos.API.Controllers
 {
     [Authorize]
     public class VoucherController : MainController

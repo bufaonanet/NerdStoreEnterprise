@@ -31,14 +31,21 @@ namespace NSE.Clientes.API.Data
         public async Task<Cliente> ObterPorCpf(string cpf)
         {
             return await _context.Clientes.FirstOrDefaultAsync(c => c.Cpf.Numero == cpf);
+        }      
+
+        public void AdicionarEndereco(Endereco endereco)
+        {
+            _context.Enderecos.Add(endereco);
+        }
+
+        public async  Task<Endereco> ObterEnderecoPorId(Guid id)
+        {
+            return await _context.Enderecos.FirstOrDefaultAsync(e => e.ClienteId == id);
         }
 
         public void Dispose()
         {
             _context?.Dispose();
         }
-
-
-
     }
 }

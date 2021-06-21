@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NSE.Pedido.Infra.Data;
+using NSE.Pedidos.Infra.Data;
 
-namespace NSE.Pedido.Infra.Migrations
+namespace NSE.Pedidos.Infra.Migrations
 {
     [DbContext(typeof(PedidosContext))]
     [Migration("20210617194419_Voucher")]

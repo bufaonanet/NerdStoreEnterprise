@@ -7,7 +7,22 @@ using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace NSE.WebApp.MVC.Services
-{    
+{
+    public interface ICatalogoService
+    {
+        Task<IEnumerable<ProdutoViewModel>> ObterTodos();
+        Task<ProdutoViewModel> ObterPorId(Guid id);
+    }
+
+    //public interface ICatalogoServiceRefit
+    //{
+    //    [Get("/produtos/")]
+    //    Task<IEnumerable<ProdutoViewModel>> ObterTodos();
+
+    //    [Get("/produtos/{id}")]
+    //    Task<ProdutoViewModel> ObterPorId(Guid id);
+    //}
+
     public class CatalogoService : Service, ICatalogoService
     {
         private readonly HttpClient _httpCliente;

@@ -14,11 +14,15 @@ namespace NSE.Clientes.API.Models
         public string Estado { get; private set; }
 
         public Guid ClienteId { get; private set; }
+        
+        //EF Relation
         public Cliente Cliente { get; private set; }
 
+        //EF Contructor
         protected Endereco() { }
 
-        public Endereco(string logradouro, string numero, string complemento, string bairro, string cep, string cidade, string estado)
+        public Endereco(string logradouro, string numero, string complemento, 
+            string bairro, string cep, string cidade, string estado, Guid clienteId)
         {
             Logradouro = logradouro;
             Numero = numero;
@@ -27,6 +31,7 @@ namespace NSE.Clientes.API.Models
             Cep = cep;
             Cidade = cidade;
             Estado = estado;
+            ClienteId = clienteId;
         }
     }
 }

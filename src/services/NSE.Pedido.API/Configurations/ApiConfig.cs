@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NSE.Pedido.Infra.Data;
+using NSE.Pedidos.Infra.Data;
 using NSE.WebApi.Core.Identidade;
 
-namespace NSE.Pedido.API.Configurations
+namespace NSE.Pedidos.API.Configurations
 {
     public static class ApiConfig
     {

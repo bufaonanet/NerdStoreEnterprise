@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using NSE.Core.Data;
-using NSE.Pedido.Domain.Vouchers;
+using NSE.Pedidos.Domain.Vouchers;
 
-namespace NSE.Pedido.Infra.Data.Repository
+namespace NSE.Pedidos.Infra.Data.Repository
 {
     public class VoucherRepository : IVoucherRepository
     {
@@ -14,16 +14,20 @@ namespace NSE.Pedido.Infra.Data.Repository
             _context = context;
         }
 
-        public IUnitOfWork UnitOfWork => _context;       
+        public IUnitOfWork UnitOfWork => _context;
 
         public async Task<Voucher> ObterVoucherPorCodigo(string codigo)
         {
             return await _context.Vouchers.FirstOrDefaultAsync(p => p.Codigo == codigo);
         }
+
+        public void Atualizar(Voucher voucher)
+        {
+            _context.Vouchers.Update(voucher);
+        }
         public void Dispose()
         {
             _context.Dispose();
         }
-
     }
 }

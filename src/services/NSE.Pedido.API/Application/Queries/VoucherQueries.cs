@@ -1,11 +1,11 @@
-﻿using NSE.Pedido.API.Application.DTO;
-using NSE.Pedido.Domain.Vouchers;
+﻿using NSE.Pedidos.API.Application.DTO;
+using NSE.Pedidos.Domain.Vouchers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NSE.Pedido.API.Application.Queries
+namespace NSE.Pedidos.API.Application.Queries
 {
     public interface IVoucherQueries
     {

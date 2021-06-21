@@ -33,7 +33,7 @@ namespace NSE.Core.DomainObjects
         }
 
 
-        #region Comarações      
+        #region Comparações      
 
         public override bool Equals(object obj)
         {

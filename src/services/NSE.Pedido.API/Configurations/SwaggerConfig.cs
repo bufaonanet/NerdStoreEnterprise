@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace NSE.Pedido.API.Configurations
+namespace NSE.Pedidos.API.Configurations
 {
     public static class SwaggerConfig
     {

@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NSE.Pedido.API.Configurations;
+using NSE.Pedidos.API.Configurations;
 using NSE.WebApi.Core.Identidade;
 
-namespace NSE.Pedido.API
+namespace NSE.Pedidos.API
 {
     public class Startup
     {
@@ -40,6 +40,8 @@ namespace NSE.Pedido.API
             services.AddMediatR(typeof(Startup));
 
             services.RegisterServices();
+
+            services.AddMessageBusConfiguration(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
